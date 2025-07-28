@@ -1,6 +1,6 @@
 src = https://www.youtube.com/watch?v=IdsBwplQAMw
 
-# 1. Application
+# 1. Application Types
 
 There is a misconception that NestJS in only for building APIs.  
 
