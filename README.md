@@ -137,3 +137,33 @@ export class AppController {
 Most of the code you'll be writing in Nest is within providers.  
 A provider is simply a class that can be injected into other classes as a dependency.  
 
+Let's take a `UserService` class as an example:
+```ts
+@Injectable()  
+export class UserService {
+  getUser() {
+    return { id: 1, name: 'Bob' };
+  }
+}
+
+@Controller()
+export class UserController {
+  constructor(private userService: UserService) {}
+
+  @Get()
+  getUser() {
+    return this.userService.getUser();
+  }
+}
+
+@Module({
+  providers: [UserService],
+  controllers: [UserController],
+})
+export class UserModule {}
+```
+By annotating the `UserService` class with the `@Injectable()` decorator, we indicate that it's a provider.  
+Then, we also declare it as a provider in the `UserModule` class using the `providers` property.  
+And finally, we can inject it into the controller via the constructor.  
+
+
