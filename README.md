@@ -166,4 +166,51 @@ By annotating the `UserService` class with the `@Injectable()` decorator, we ind
 Then, we also declare it as a provider in the `UserModule` class using the `providers` property.  
 And finally, we can inject it into the controller via the constructor.  
 
+The next two chapters explain in more details the 2 core concepts we need to understand when it comes to **providers**.  
+In summary, NestJS uses **Dependency Injection** as the mechanism to provide the `UserService` to the `UserController`, 
+and by default, the `UserService` instance it provides is a **Singleton**, meaning it's the same instance used everywhere 
+else in our application.
+
+# 7. Dependency Injection
+
+Dependency Injection (DI) is a **core concept** in NestJS that allows a class tp receive its dependencies 
+from an outside source, rather than creating them itself.  
+
+This makes our code more modular, decoupled, and easier to test.  
+
+## Declaring a dependency
+
+The `UserService` class above is **decorated** with `@Injectable()`.  
+This decorator **marks** the class as a *provider* than can be managed by the NestJS Inversion of Control (IoC) container.  
+
+## Registering the provider
+
+Inside the `UserModule`, we list `UserService` in the `providers` array.  
+This tells the `UserModule` that `UserService` is available for injection within this module.
+
+## Injecting the dependency
+
+The `UserController` needs to use the logic from `UserService`.  
+When NestJS creates an instance of `UserController`, it sees the `UserService` type in the constructor.  
+It then looks for a registered provider of that type, finds the one we registered in the module, and automatically injects it.  
+
+The key benefit is that `UserController` is no longer responsible for creating or managing `UserService`.  
+It's completely decoupled, making it simple to swap `UserService` with a mock version for testing, for example.  
+
+# 8. Singleton Pattern
+
+The singleton pattern ensures that a class has **only one instance** and provides a **single** global **point of access** to it.  
+
+In NestJS, providers are singletons by default.  
+
+In our example at chapter 6, when the application starts: 
+- NestJS scans the modules and sees that `UserService` is a provider in `UserModule`.  
+- It then creates a single instance of `UserService` and caches it.   
+- Every time any class asks for `UserService` to be injected, NestJS provides that **exact same instance**
+
+So, if we had ten different controllers all depending on `UserService`, they would all share the one and only `UserService` object.  
+This is highly efficient as it saves memory and ensures that any state held within the service is shared across the application.  
+
+# 9. Middlewares
+
 
