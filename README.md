@@ -6,7 +6,7 @@ There is a misconception that NestJS in only for building APIs.
 
 In fact, there are 3 types of applications you can build with Nest:
 
-- an HTTP server application, using `NestFactory.create`:
+- **an HTTP server application**, using `NestFactory.create`:
 ```ts
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
@@ -18,7 +18,7 @@ async function bootstrap() {
 bootstrap();
 ```
 
-- a Microservice application, using `NestFactory.createMicroservice`:
+- **a Microservice application**, using `NestFactory.createMicroservice`:
 ```ts
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
@@ -39,7 +39,7 @@ bootstrap();
 Microservices are very similar to HTTP servers, except that they can use different transport protocols and 
 communicate through internal networks.  
 
-- a standalone application, using `NestFactory.createApplicationContext`:
+- **a standalone application**, using `NestFactory.createApplicationContext`:
 ```ts
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
@@ -133,4 +133,7 @@ export class AppController {
 ```
 
 # 6. Providers
+
+Most of the code you'll be writing in Nest is within providers.  
+A provider is simply a class that can be injected into other classes as a dependency.  
 
