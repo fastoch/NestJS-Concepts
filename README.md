@@ -166,7 +166,10 @@ By annotating the `UserService` class with the `@Injectable()` decorator, we ind
 Then, we also declare it as a provider in the `UserModule` class using the `providers` property.  
 And finally, we can inject it into the controller via the constructor.  
 
+## Dependency Injection & the Singleton Pattern
+
 The next two chapters explain in more details the 2 core concepts we need to understand when it comes to **providers**.  
+
 In summary, NestJS uses **Dependency Injection** as the mechanism to provide the `UserService` to the `UserController`, 
 and by default, the `UserService` instance it provides is a **Singleton**, meaning it's the same instance used everywhere 
 else in our application.
@@ -213,4 +216,31 @@ This is highly efficient as it saves memory and ensures that any state held with
 
 # 9. Middlewares
 
+We can make a request go through several stages before hanlding it over to the (HTTP) method handler.  
+For example, we could use Middleware to log every incoming request.  
+
+We don't need to add middlewares everywhere since Nest comes with **built-in** features for common **request flow management**.
+
+## Method Handler
+
+Refers to the specific function inside a **controller** that is responsible for handling a particular HTTP request.  
+The method handler is mapped to an endpoint using a combination of: 
+- the **controller route prefix** 
+- and HTTP method decorators like @Get(), @Post(), etc.
+
+# 10. Guards
+
+Guards are a **critical** part of the **request lifecycle** in NestJS.  
+
+They work more or less like security check at an airport, and their primary purpose is to determine whether 
+the request will be handled by the root handler, based on specific conditions like:
+- roles
+- permissions
+- or any custom logic
+
+Guards have access to the execution context, which allows them to inspect some details about the request.  
+For example, an authentication guard can check if the user is authenticated and authorized to access a requested resource.  
+
+If the guard returns true, then the request passes through.  
+If it returns false, then the request is denied, and we send an error response to the client.  
 
