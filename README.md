@@ -242,5 +242,22 @@ Guards have access to the execution context, which allows them to inspect some d
 For example, an authentication guard can check if the user is authenticated and authorized to access a requested resource.  
 
 If the guard returns true, then the request passes through.  
-If it returns false, then the request is denied, and we send an error response to the client.  
+If it returns false, then the request is denied, and we send an error response to the client, for example.  
+
+# 11. Interceptors
+
+After the guard, we can add interceptors to our application.  
+![Request Lifecycle](image.png)  
+
+Interceptors are classes that allow us to execute custom logic both before and after the execution of a request handler (controller method).  
+
+Interceptors are implemented by creating classes with the `@Injectable()` decorator and the `NestInterceptor` interface, which requires an `intercept()` method. 
+
+The next step before getting to the handler is Pipes.  
+
+# 12. Pipes
+
+That's where we can validate and transform the data that is handed over to the handler, to ensure that it meets  
+certain criteria or is in the correct format.  
+
 
