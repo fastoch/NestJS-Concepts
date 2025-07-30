@@ -260,4 +260,40 @@ The next step before getting to the handler is Pipes.
 That's where we can validate and transform the data that is handed over to the handler, to ensure that it meets  
 certain criteria or is in the correct format.  
 
+Pipes are classes that implement the PipeTransform interface.  
+They are annotated with the `@Injectable()` decorator.  
+
+For instance, a pipe can validate the data sent in a request to make sure that it conforms with the expected format.  
+It's up to us to implement whatever validation rules we want.  
+If the data is invalid, the pipe can throw an exception, preventing the route handler from executing.  
+
+Additionally, pipes can transform the data into a more suitable format for processing.  
+For example, a pipe can convert a string input into an integer, or parse dates from string representation.  
+
+Built-in pipes like `ValidationPipe`, `ParseIntPipe`, etc. offer some common validation and transformation.  
+But we can also create custom pipes to handle specific requirements.  
+
+If at any point during the request handling there is an unhandled error, NestJS will return a "500 internal error" by default.  
+However, we can manually throw standard HTTP exceptions and be a bit more descriptive.  
+We can even customize error handling through **Exception Filters**.
+
+# 13. Filters
+
+Exception filters are classes that implement the `ExceptionFilter` interface.  
+And they are decorated with the `@Catch()` decorator.  
+
+They can catch exceptions thrown by any part of the request handling process, including:
+- guards
+- interceptors
+- pipes
+- route handlers
+
+When an exception is caught, the filter determines how to handle it and what response to send.  
+
+For example we can have a global exception filter that can catch all exceptions, log the error details, and 
+return a standard error response to the client.  
+
+This ensures that the clients receive consistent error messages, and that sensitive information is not exposed.  
+
+Exception filters provide a centralized way of handling errors, and maintain the stability and security of our app.  
 
